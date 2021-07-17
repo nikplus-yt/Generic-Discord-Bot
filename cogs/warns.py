@@ -2,8 +2,10 @@ import discord
 from discord.ext import commands
 import asyncio
 from utils.util import Pag
+from cogs.moderation import staff_list
+
 embed_red=discord.Colour.red()
-from moderation import staff_list
+
 class Warns(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
