@@ -3,7 +3,7 @@ from discord.ext import commands
 import asyncio
 from utils.util import Pag
 embed_red=discord.Colour.red()
-
+from moderation import staff_list
 class Warns(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -12,8 +12,8 @@ class Warns(commands.Cog):
     @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
     async def warn(self, ctx, member: discord.Member, *, reason=None):
-        if member.id in [ctx.author.id, self.bot.user.id]:
-            embed = discord.Embed(title='**❌ Error**', description='You can\'t warn yourself!', color=discord.Colour.red())
+        if member.id in staff_list:
+            embed = discord.Embed(title='**❌ Error**', description='You can\'t warn a staff member!', color=discord.Colour.red())
             embed.set_footer(text='This message will delete in 5 seconds...')
             return await ctx.send(embed=embed, delete_after=5)
             await asyncio.sleep(5)
