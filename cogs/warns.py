@@ -58,6 +58,9 @@ class Warns(commands.Cog):
             await channel.send(embed=embed)
         except discord.HTTPException:
             await ctx.send(member.mention, embed=embed)
+            embed=discord.Embed(title='warn case', description=f'**Offender**: {member} | {member.mention}\n **Reason:** {reason}\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_red)
+            embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
+            channel = self.bot.get_channel(865809356032573450)
 
     @commands.command()
     @commands.guild_only()
