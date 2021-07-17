@@ -74,6 +74,12 @@ class Moderation(commands.Cog):
     )
     @commands.has_permissions(manage_messages=True)
     async def mute(self, ctx, member: discord.Member, *, time: TimeConverter=None):
+        embed = discord.Embed(title="muted!", description=f"{member.mention} has been muted ", colour=embed_color)
+        embed.add_field(name="reason:", value=reason, inline=False)
+        embed.add_field(name="time left for the mute:", value=f"{time}", inline=False)
+        await ctx.send(embed=embed, delete_after=5)
+        await asyncio.sleep(5)
+        await ctx.message.delete()
         role = discord.utils.get(ctx.guild.roles, name="Muted")
         if not role:
             await ctx.send("No muted role was found! Please create one called `Muted`")
@@ -83,13 +89,6 @@ class Moderation(commands.Cog):
             if self.bot.muted_users[member.id]:
                 await ctx.send("This user is already muted")
                 return
-            else:
-                embed = discord.Embed(title="muted!", description=f"{member.mention} has been muted ", colour=embed_color)
-                embed.add_field(name="reason:", value=reason, inline=False)
-                embed.add_field(name="time left for the mute:", value=f"{time}", inline=False)
-                await ctx.send(embed=embed, delete_after=5)
-                await asyncio.sleep(5)
-                await ctx.message.delete()
         except KeyError:
             pass
 
@@ -106,7 +105,7 @@ class Moderation(commands.Cog):
         await member.add_roles(role)
 
         if not time:
-            embed = discord.Embed(title="muted!", description=f"{member.mention} has been muted ", colour=embed_color)
+            embed = discord.Embed(title="muted!", description=f"{member.mention} has been muted", colour=embed_color)
             embed.add_field(name="reason:", value=reason, inline=False)
             embed.add_field(name="time left for the mute:", value=f"Infinite", inline=False)
             await ctx.send(embed=embed, delete_after=5)
