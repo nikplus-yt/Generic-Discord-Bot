@@ -114,14 +114,14 @@ class Moderation(commands.Cog):
             await ctx.message.delete()
             embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n**Duration:** {time}s\n**Reason:** {reason}\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
             embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
-            channel = self.bot.get_channel(854077705879552070)
+            channel = self.bot.get_channel(865809356032573450)
             await channel.send(embed=embed)
         else:
             minutes, seconds = divmod(time, 60)
             hours, minutes = divmod(minutes, 60)
             embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n**Duration:** {time}s\n**Reason:** {reason}\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
             embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
-            channel = self.bot.get_channel(854077705879552070)
+            channel = self.bot.get_channel(865809356032573450)
             await channel.send(embed=embed)
             if int(hours):
                 embed = discord.Embed(title="muted!", description=f"{member.mention} has been muted ", colour=embed_color)
@@ -202,7 +202,7 @@ class Moderation(commands.Cog):
         await ctx.message.delete()
         embed=discord.Embed(title='unmute case', description=f'**Offender**: {member} | {member.mention}\n**Reason:** {reason}\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
         embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
-        channel = self.bot.get_channel(854077705879552070)
+        channel = self.bot.get_channel(865809356032573450)
         await channel.send(embed=embed)
 
     @commands.command(
@@ -219,14 +219,14 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed, delete_after=5)
             await asyncio.sleep(5)
             await ctx.message.delete()
-            channel = self.client.get_channel(854077705879552070)
+            channel = self.client.get_channel(865809356032573450)
             await channel.send(embed=embed)
         else:
             embed = discord.Embed(title="User kicked successfully", description=f'{member.mention} was kicked by {ctx.author.mention}!\n User was kicked for: `{reason}`', color=embed_color)
             await ctx.send(embed=embed, delete_after=5)
             await asyncio.sleep(5)
             await ctx.message.delete()
-            channel = self.client.get_channel(854077705879552070)
+            channel = self.client.get_channel(865809356032573450)
             await channel.send(embed=embed)
 
     @commands.command(
@@ -245,14 +245,14 @@ class Moderation(commands.Cog):
             embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
             await asyncio.sleep(5)
             await ctx.message.delete()
-            channel = self.bot.get_channel(854077705879552070)
+            channel = self.bot.get_channel(865809356032573450)
             await channel.send(embed=embed)
         else:
             embed = discord.Embed(title="User banned successfully", description=f'{member.mention} was banned by {ctx.author.mention}!\n User was banned for: `{reason}`', color=embed_color)
             await ctx.send(embed=embed, delete_after=5)
             await asyncio.sleep(5)
             await ctx.message.delete()
-            channel = self.bot.get_channel(854077705879552070)
+            channel = self.bot.get_channel(865809356032573450)
             await channel.send(embed=embed)
 
     @ban.error
@@ -280,7 +280,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed, delete_after=5)
         await asyncio.sleep(5)
         await ctx.message.delete()
-        channel = self.client.get_channel(854077705879552070)
+        channel = self.client.get_channel(865809356032573450)
         await channel.send(embed=embed)
     @commands.command(
         name="moderate",
