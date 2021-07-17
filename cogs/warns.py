@@ -12,12 +12,12 @@ class Warns(commands.Cog):
     @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
     async def warn(self, ctx, member: discord.Member, *, reason=None):
-       # if member.id in [ctx.author.id, self.bot.user.id]:
-       #     embed = discord.Embed(title='**❌ Error**', description='You can\'t warn yourself!', color=discord.Colour.red())
-       #     embed.set_footer(text='This message will delete in 5 seconds...')
-       #     return await ctx.send(embed=embed, delete_after=5)
-       #     await asyncio.sleep(5)
-       #     await ctx.message.delete()
+        if member.id in [ctx.author.id, self.bot.user.id]:
+            embed = discord.Embed(title='**❌ Error**', description='You can\'t warn yourself!', color=discord.Colour.red())
+            embed.set_footer(text='This message will delete in 5 seconds...')
+            return await ctx.send(embed=embed, delete_after=5)
+            await asyncio.sleep(5)
+            await ctx.message.delete()
             
         
         current_warn_count = len(
