@@ -76,7 +76,7 @@ class Moderation(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def mute(self, ctx, member: discord.Member, time: TimeConverter=None, *, reason=None):
         if member.id in staff_list:
-            embed = discord.Embed(title='**❌ Error**', description='You can\'t mute yourself!', color=discord.Colour.red())
+            embed = discord.Embed(title='**❌ Error**', description='You can\'t mute a staff member!', color=discord.Colour.red())
             embed.set_footer(text='This message will delete in 5 seconds...')
             return await ctx.send(embed=embed, delete_after=5)
             await asyncio.sleep(5)
