@@ -52,13 +52,13 @@ class Warns(commands.Cog):
             await ctx.send(embed=embed, delete_after=5)
             await asyncio.sleep(5)
             await ctx.message.delete()
-        except discord.HTTPException:
-            await ctx.send(member.mention, embed=embed)
             embed=discord.Embed(title='warn case', description=f'**Offender**: {member} | {member.mention}\n **Reason:** {reason}\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_red)
             embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
             channel = self.bot.get_channel(854077705879552070)
             await channel.send(embed=embed)
-            
+        except discord.HTTPException:
+            await ctx.send(member.mention, embed=embed)
+
     @commands.command()
     @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
