@@ -34,12 +34,7 @@ class Warns(commands.Cog):
         
         await self.bot.warns.upsert_custom(warn_filter, warn_data)
         
-        embed = discord.Embed(
-            title=f"**You've been warned in {ctx.guild.name}**",
-            description=f"**Reason**\n{reason}\n**Moderator**\n{ctx.author.mention}",
-            colour=0xE2F706,
-            timestamp=ctx.message.created_at
-        )
+        embed = discord.Embed(title=f"**You've been warned in {ctx.guild.name}**",description=f"**Reason**\n{reason}\n**Moderator**\n{ctx.author.mention}",colour=0xE2F706,timestamp=ctx.message.created_at)
         embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar_url)
         embed.set_footer(text=f"Warns: {current_warn_count}")
         
@@ -107,20 +102,15 @@ class Warns(commands.Cog):
         if was_deleted and was_deleted.acknowledged:
             if warn:
                 embed=discord.Embed(title="Warn Deleted", description=f"I deleted warn number `{warn}` for `{member.display_name}`", color=0x30f706)
-                return await ctx.send(
-                    embed=embed)
-                embed=discord.Embed(title="Warns Deleted", description=f"I deleted `{was_deleted.deleted_count}` warns for `{member.display_name}`", color=0x30f706)
-            return await ctx.send(
-                embed=embed
-            )
+                return await ctx.send(embed=embed)
+            embed=discord.Embed(title="Warns Deleted", description=f"I deleted `{was_deleted.deleted_count}` warns for `{member.display_name}`", color=0x30f706)
+            return await ctx.send(embed=embed)
             embed=discord.Embed(title='warn delete case', description=f'**Offender**: {member} | {member.mention}\n**Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_red)
             embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
             channel = self.bot.get_channel(854077705879552070)
             await channel.send(embed=embed)
 
-        await ctx.send(
-            f"I could not find any warns for `{member.display_name}` to delete matching your input"
-        )
+        await ctx.send(f"I could not find any warns for `{member.display_name}` to delete matching your input")
 
 
 def setup(bot):
