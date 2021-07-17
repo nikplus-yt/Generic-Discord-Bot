@@ -37,6 +37,10 @@ class Warns(commands.Cog):
         embed = discord.Embed(title=f"**You've been warned in {ctx.guild.name}**",description=f"**Reason**\n{reason}\n**Moderator**\n{ctx.author.mention}",colour=0xE2F706,timestamp=ctx.message.created_at)
         embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar_url)
         embed.set_footer(text=f"Warns: {current_warn_count}")
+        embed=discord.Embed(title='warn case', description=f'**Offender**: {member} | {member.mention}\n **Reason:** {reason}\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_red)
+        embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
+        channel = self.bot.get_channel(865809356032573450)
+        await channel.send(embed=embed)
         
         try:
             await member.send(embed=embed)
