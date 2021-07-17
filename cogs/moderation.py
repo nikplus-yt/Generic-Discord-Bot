@@ -12,6 +12,7 @@ from dateutil.relativedelta import relativedelta
 time_regex = re.compile("(?:(\d{1,5})(h|s|m|d))+?")
 time_dict = {"h": 3600, "s": 1, "m": 60, "d": 86400}
 
+staff_list = ['633025959221788676', '853437257800089610']
 
 class TimeConverter(commands.Converter):
     async def convert(self, ctx, argument):
@@ -70,10 +71,17 @@ class Moderation(commands.Cog):
     @commands.command(
         name='mute',
         description="Mutes a given user for x time!",
-        ussage='<user> [time]'
+        ussage='<user> [time] [reason]'
     )
     @commands.has_permissions(manage_messages=True)
-    async def mute(self, ctx, member: discord.Member, *, time: TimeConverter=None):
+    async def mute(self, ctx, member: discord.Member, time: TimeConverter=None, *, reason=None):
+        if member.id in [ctx.author.id, self.bot.user.id]:
+            embed = discord.Embed(title='**❌ Error**', description='You can\'t mute yourself!', color=discord.Colour.red())
+            embed.set_footer(text='This message will delete in 5 seconds...')
+            return await ctx.send(embed=embed, delete_after=5)
+            await asyncio.sleep(5)
+            await ctx.message.delete()
+
         role = discord.utils.get(ctx.guild.roles, name="Muted")
         if not role:
             await ctx.send("No muted role was found! Please create one called `Muted`")
@@ -98,37 +106,37 @@ class Moderation(commands.Cog):
 
         await member.add_roles(role)
         embed = discord.Embed(title="muted!", description=f"{member.mention} has been muted ", colour=embed_color)
-        embed.add_field(name="time left for the mute:", value=f"{time}", inline=False)
+        embed.add_field(name="time left for the mute:", value=f"{time}s", inline=False)
         await ctx.send(embed=embed, delete_after=5)
         await asyncio.sleep(5)
         await ctx.message.delete()
-
+        minutes, seconds = divmod(time, 60)
+        hours, minutes = divmod(minutes, 60)
+        embed = discord.Embed(title=f"**You've been muted in {ctx.guild.name}**",description=f"**Duration:**\n{hours} hours, {minutes} minutes, and {seconds} seconds\n**Reason**\n {reason}\n**Moderator**\n{ctx.author.mention}", colour=0xE2F706,timestamp=ctx.message.created_at)
+        embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar_url)
+        await member.send(embed=embed)
         if not time:
-            embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n**Duration:** {time}s\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
+            embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n **Reason:** {reason} \n  **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
             embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
             channel = self.bot.get_channel(865809356032573450)
             await channel.send(embed=embed)
         else:
             minutes, seconds = divmod(time, 60)
             hours, minutes = divmod(minutes, 60)
-            embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n**Duration:** {time}s\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
-            embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
-            channel = self.bot.get_channel(865809356032573450)
-            await channel.send(embed=embed)
             if int(hours):
-                embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n**Duration:** {time}s\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
+                embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n **Reason:** {reason} \n**Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
                 embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
                 embed.add_field(name="time left for the mute:", value=f"{hours} hours, {minutes} minutes and {seconds} seconds", inline=False)
                 channel = self.bot.get_channel(865809356032573450)
                 await channel.send(embed=embed)
             elif int(minutes):
-                embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n**Duration:** {time}s\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
+                embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n **Reason:** {reason} \n**Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
                 embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
                 embed.add_field(name="time left for the mute:", value=f"{minutes} minutes and {seconds} seconds", inline=False)
                 channel = self.bot.get_channel(865809356032573450)
                 await channel.send(embed=embed)
             elif int(seconds):
-                embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n**Duration:** {time}s\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
+                embed=discord.Embed(title='mute case', description=f'**Offender**: {member} | {member.mention}\n **Reason:** {reason} \n**Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
                 embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
                 embed.add_field(name="time left for the mute:", value=f"{seconds} seconds", inline=False)
                 channel = self.bot.get_channel(865809356032573450)
@@ -140,7 +148,9 @@ class Moderation(commands.Cog):
 
             if role in member.roles:
                 await member.remove_roles(role)
-                embed=discord.Embed(title='unmute case', description=f'**Offender**: {member} | {member.mention}\n**Duration:** {time}s seconds \n**Reason:** `Time expired`\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
+                minutes, seconds = divmod(time, 60)
+                hours, minutes = divmod(minutes, 60)
+                embed=discord.Embed(title='unmute case', description=f'**Offender**: {member} | {member.mention}\n**Duration:** {hours} hours, {minutes} minutes, and {seconds} seconds\n**Reason:** `Time expired`\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_color)
                 embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
                 channel = self.bot.get_channel(865809356032573450)
                 await channel.send(embed=embed)
@@ -202,9 +212,17 @@ class Moderation(commands.Cog):
     @commands.guild_only()
     @commands.has_guild_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
-        await member.kick(reason=reason)
+        if member.id in [staff_list]:
+            embed = discord.Embed(title='**❌ Error**', description='You can\'t kick a staff member!', color=discord.Colour.red())
+            embed.set_footer(text='This message will delete in 5 seconds...')
+            return await ctx.send(embed=embed, delete_after=5)
+            await asyncio.sleep(5)
+            await ctx.message.delete()
+        else:
+            await ctx.send('success')
+            # await member.kick(reason=reason)
         if reason == None:
-            embed = discord.Embed(title="User kicked successfully",description=f'{member.mention} was kicked  by {ctx.author.mention}!\n User was kicked for no reason.',color=embed_color)
+            embed = discord.Embed(title="User kicked successfully",description=f'{member.mention} was kicked  by {ctx.author.mention}!\n No reason added.',color=embed_color)
             await ctx.send(embed=embed, delete_after=5)
             await asyncio.sleep(5)
             await ctx.message.delete()
