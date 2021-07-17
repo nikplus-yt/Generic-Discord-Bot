@@ -12,9 +12,9 @@ class verify(commands.Cog):
         verify_role = get(ctx.guild.roles, name='Members')
         if ctx.channel.id == 853801190612271138 and ctx.author.roles != 853500656446341130:
             await ctx.author.add_roles(verify_role)
-            embed = discord.Embed(title='Welcome!', description='You\'ve successfully verified into the server.', color=embed_color)
+            embed = discord.Embed(title=f'Welcome {ctx.author}!', description=f'**<a:PenguinWalk:854189751556243496> Welcome to {ctx.guild.name}! <a:PenguinWalk:854189751556243496>**\n\n Welcome {ctx.author.mention}! Please make sure to read the <#853500885207482418> and get your roles here <#855632692166393868>!', color=embed_color)
             await ctx.author.send(embed=embed)
-            await asyncio.sleep(3)
+            await asyncio.sleep(1)
             await ctx.message.delete()
 
         elif ctx.channel.id != 853801190612271138:
