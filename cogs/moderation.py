@@ -12,7 +12,7 @@ from dateutil.relativedelta import relativedelta
 time_regex = re.compile("(?:(\d{1,5})(h|s|m|d))+?")
 time_dict = {"h": 3600, "s": 1, "m": 60, "d": 86400}
 
-staff_list = ['633025959221788676', '853437257800089610']
+staff_list = ['633025959221788676', '853437257800089610', '853808640506462208']
 
 class TimeConverter(commands.Converter):
     async def convert(self, ctx, argument):
@@ -218,7 +218,8 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed)
             
         else:
-            await member.kick(reason=reason)
+            await ctx.send('test')
+            # await member.kick(reason=reason)
         if reason == None:
             embed = discord.Embed(title="User kicked successfully",description=f'{member.mention} was kicked  by {ctx.author.mention}!\n No reason added.',color=embed_color)
             await ctx.send(embed=embed, delete_after=5)
