@@ -101,14 +101,15 @@ class Warns(commands.Cog):
         was_deleted = await self.bot.warns.delete_by_custom(filter_dict)
         if was_deleted and was_deleted.acknowledged:
             if warn:
+                embed=discord.Embed(title='warn delete case', description=f'**Offender**: {member} | {member.mention}\n**Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_red)
+                embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
+                channel = self.bot.get_channel(854077705879552070)
+                await channel.send(embed=embed)
                 embed=discord.Embed(title="Warn Deleted", description=f"I deleted warn number `{warn}` for `{member.display_name}`", color=0x30f706)
                 return await ctx.send(embed=embed)
             embed=discord.Embed(title="Warns Deleted", description=f"I deleted `{was_deleted.deleted_count}` warns for `{member.display_name}`", color=0x30f706)
             return await ctx.send(embed=embed)
-            embed=discord.Embed(title='warn delete case', description=f'**Offender**: {member} | {member.mention}\n**Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_red)
-            embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
-            channel = self.bot.get_channel(854077705879552070)
-            await channel.send(embed=embed)
+            
 
         await ctx.send(f"I could not find any warns for `{member.display_name}` to delete matching your input")
 
