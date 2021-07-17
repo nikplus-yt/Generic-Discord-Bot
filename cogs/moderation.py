@@ -75,7 +75,7 @@ class Moderation(commands.Cog):
     )
     @commands.has_permissions(manage_messages=True)
     async def mute(self, ctx, member: discord.Member, time: TimeConverter=None, *, reason=None):
-        if member.id in [ctx.author.id, self.bot.user.id]:
+        if member.id in staff_list:
             embed = discord.Embed(title='**❌ Error**', description='You can\'t mute yourself!', color=discord.Colour.red())
             embed.set_footer(text='This message will delete in 5 seconds...')
             return await ctx.send(embed=embed, delete_after=5)
@@ -212,15 +212,14 @@ class Moderation(commands.Cog):
     @commands.guild_only()
     @commands.has_guild_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
-        if member.id in [staff_list]:
+        if member.id in staff_list:
             embed = discord.Embed(title='**❌ Error**', description='You can\'t kick a staff member!', color=discord.Colour.red())
             embed.set_footer(text='This message will delete in 5 seconds...')
             return await ctx.send(embed=embed, delete_after=5)
             await asyncio.sleep(5)
             await ctx.message.delete()
         else:
-            await ctx.send('success')
-            # await member.kick(reason=reason)
+            await member.kick(reason=reason)
         if reason == None:
             embed = discord.Embed(title="User kicked successfully",description=f'{member.mention} was kicked  by {ctx.author.mention}!\n No reason added.',color=embed_color)
             await ctx.send(embed=embed, delete_after=5)
