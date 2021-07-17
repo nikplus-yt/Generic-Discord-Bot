@@ -215,9 +215,8 @@ class Moderation(commands.Cog):
         if member.id in staff_list:
             embed = discord.Embed(title='**❌ Error**', description='You can\'t kick a staff member!', color=discord.Colour.red())
             embed.set_footer(text='This message will delete in 5 seconds...')
-            await ctx.send(embed=embed, delete_after=5)
-            await asyncio.sleep(5)
-            await ctx.message.delete()
+            return await ctx.send(embed=embed, delete_after=5)
+            
         else:
             await member.kick(reason=reason)
         if reason == None:
