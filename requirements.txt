@@ -14,7 +14,6 @@ dnspython==1.16.0
 emoji==1.2.0
 emojis==0.6.0
 idna==3.2
-logging==0.4.9.6
 motor==2.4.0
 multidict==5.1.0
 Paginator==0.5.1
