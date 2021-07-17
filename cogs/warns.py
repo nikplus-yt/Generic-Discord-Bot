@@ -52,13 +52,13 @@ class Warns(commands.Cog):
             await asyncio.sleep(5)
             await ctx.message.delete()
             embed=discord.Embed(title='warn case', description=f'**Offender**: {member} | {member.mention}\n **Reason:** {reason}\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_red)
-            embed.set_footer(text=f'Warns: {current_warn_count}')
+            embed.set_footer(text=f'Offender Warns: {current_warn_count} | Offender ID {member.id} | Moderator ID: {ctx.author.id}')
             channel = self.bot.get_channel(865809356032573450)
             await channel.send(embed=embed)
         except discord.HTTPException:
             await ctx.send(member.mention, embed=embed)
             embed=discord.Embed(title='warn case', description=f'**Offender**: {member} | {member.mention}\n **Reason:** {reason}\n **Moderator:** {ctx.author} | {ctx.author.mention}', color=embed_red)
-            embed.set_footer(text=f'Warns: {current_warn_count}')
+            embed.set_footer(text=f'Offender Warns: {current_warn_count} | Offender ID {member.id} | Moderator ID: {ctx.author.id}')
             channel = self.bot.get_channel(865809356032573450)
             await channel.send(embed=embed)
 
