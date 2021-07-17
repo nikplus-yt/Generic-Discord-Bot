@@ -51,7 +51,7 @@ class Invites(commands.Cog):
             {"guild_id": member.guild.id, "inviter_id": inviter.id}, data
         )
 
-        channel = discord.utils.get(member.guild.text_channels, name="recording")
+        channel = discord.utils.get(member.guild.text_channels, name="welcome")
         embed = discord.Embed(
             title=f"Welcome {member.display_name}!",
             description=f"Invited by: {inviter.mention}\nInvites: {data['count']}",
