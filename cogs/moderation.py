@@ -83,6 +83,13 @@ class Moderation(commands.Cog):
             if self.bot.muted_users[member.id]:
                 await ctx.send("This user is already muted")
                 return
+            else:
+                embed = discord.Embed(title="muted!", description=f"{member.mention} has been muted ", colour=embed_color)
+                embed.add_field(name="reason:", value=reason, inline=False)
+                embed.add_field(name="time left for the mute:", value=f"{time}", inline=False)
+                await ctx.send(embed=embed, delete_after=5)
+                await asyncio.sleep(5)
+                await ctx.message.delete()
         except KeyError:
             pass
 
