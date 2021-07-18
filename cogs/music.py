@@ -10,23 +10,23 @@ class Player(commands.Cog):
         self.song_queue = {}
 
         self.setup()
-
+    @commands.command()
     def setup(self):
         for guild in self.bot.guilds:
             self.song_queue[guild.id] = []
-
+    @commands.command()
     async def check_queue(self, ctx):
         if len(self.song_queue[ctx.guild.id]) > 0:
             ctx.voice_client.stop()
             await self.play_song(ctx, self.song_queue[ctx.guild.id][0])
             self.song_queue[ctx.guild.id].pop(0)
-
+    @commands.command()
     async def search_song(self, amount, song, get_url=False):
         info = await self.bot.loop.run_in_executor(None, lambda: youtube_dl.YoutubeDL({"format" : "bestaudio", "quiet" : True}).extract_info(f"ytsearch{amount}:{song}", download=False, ie_key="YoutubeSearch"))
         if len(info["entries"]) == 0: return None
 
         return [entry["webpage_url"] for entry in info["entries"]] if get_url else info
-
+    @commands.command()
     async def play_song(self, ctx, song):
         url = pafy.new(song).getbestaudio().url
         ctx.voice_client.play(discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(url)), after=lambda error: self.bot.loop.create_task(self.check_queue(ctx)))
