@@ -1,7 +1,7 @@
 import asyncio
 import platform
 import random
-staff_list = ['633025959221788676', '853437257800089610']
+staff_list = ['<@633025959221788676>', '<@853437257800089610>']
 import discord
 from discord.ext import commands
 
@@ -88,7 +88,7 @@ class Misc(commands.Cog):
     @commands.command(name="staff", description="List of staff members", aliases=["staff_members", "staff_list"])
     async def staff(self, ctx):
         
-        embed=discord.Embed(title='Staff Members', description=f'<@{str(">\n<@".join(staff_list))}>', color=0x03D5D6)
+        embed=discord.Embed(title='Staff Members', description="\n".join([str(i) for i in staff_list], color=0x03D5D6)
         await ctx.send(embed=embed)
 
 def setup(bot):
