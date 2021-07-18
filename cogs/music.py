@@ -11,7 +11,7 @@ class Player(commands.Cog):
 
         self.setup()
     @commands.command()
-    def setup(self):
+    def setup():
         for guild in self.bot.guilds:
             self.song_queue[guild.id] = []
     @commands.command()
