@@ -1,10 +1,10 @@
 import asyncio
 import platform
 import random
-from cogs.moderation import staff_list
+staff_list = ['633025959221788676', '853437257800089610']
 import discord
 from discord.ext import commands
-a = map(x, staff_list)
+
 
 class Misc(commands.Cog):
     def __init__(self, bot):
@@ -88,7 +88,7 @@ class Misc(commands.Cog):
     @commands.command(name="staff", description="List of staff members", aliases=["staff_members", "staff_list"])
     async def staff(self, ctx):
         
-        embed=discord.Embed(title='Staff Members', description=f'<@{str("/n".join(a))}>', color=0x03D5D6)
+        embed=discord.Embed(title='Staff Members', description=f'<@{str("/n".join(staff_list))}>', color=0x03D5D6)
         await ctx.send(embed=embed)
 
 def setup(bot):
