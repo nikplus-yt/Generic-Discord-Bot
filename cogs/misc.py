@@ -84,11 +84,11 @@ class Misc(commands.Cog):
             command.enabled = not command.enabled
             ternary = "enabled" if command.enabled else "disabled"
             await ctx.send(f"I have {ternary} {command.qualified_name} for you!")
+            
     @commands.command(name="staff", description="List of staff members", aliases=["staff_members", "staff_list"])
     async def staff(self, ctx):
-        for ids in staff_list: 
-            embed=discord.Embed(description=f'{ids}')
-            await ctx.send(embed=embed)
+        embed=discord.Embed(title='Staff Members', description=f'<@{str.join(staff_list)}>', color=0x03D5D6)
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Misc(bot))
