@@ -1,7 +1,6 @@
 import asyncio
 import platform
 import random
-staff_list = ['<@633025959221788676>', '<@853437257800089610>']
 import discord
 from discord.ext import commands
 
@@ -84,11 +83,5 @@ class Misc(commands.Cog):
             command.enabled = not command.enabled
             ternary = "enabled" if command.enabled else "disabled"
             await ctx.send(f"I have {ternary} {command.qualified_name} for you!")
-            
-    @commands.command(name="staff", description="List of staff members", aliases=["staff_members", "staff_list"])
-    async def staff(self, ctx):
-        embed=discord.Embed(title='Staff Members', description=f'{"\n".join([str(i) for i in staff_list])}', color=0x03D5D6)
-        await ctx.send(embed=embed,"\n".join([str(i) for i in staff_list]))
-
 def setup(bot):
     bot.add_cog(Misc(bot))
