@@ -88,7 +88,7 @@ class Misc(commands.Cog):
     @commands.command(name="staff", description="List of staff members", aliases=["staff_members", "staff_list"])
     async def staff(self, ctx):
         
-        embed=discord.Embed(title='Staff Members', description=f'<@{str("/n".join(staff_list))}>', color=0x03D5D6)
+        embed=discord.Embed(title='Staff Members', description=f'<@{str(">\n<@".join(staff_list))}>', color=0x03D5D6)
         await ctx.send(embed=embed)
 
 def setup(bot):
