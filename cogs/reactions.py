@@ -78,7 +78,7 @@ class Reactions(commands.Cog, name="ReactionRoles"):
             await ctx.send("I cannot send a message to that channel! Please give me perms and try again.", delete_after=30)
             return
 
-        embed = discord.Embed(title="Reaction Roles!", color=0x8000ff)
+        embed = discord.Embed(title="Ping Roles!", color=0x8000ff)
 
         desc = ""
         reaction_roles = await self.bot.reaction_roles.get_all()
