@@ -136,7 +136,7 @@ class Reactions(commands.Cog, name="ReactionRoles"):
                 return
 
         emoji = str(emoji)
-        await self.bot.reaction_roles.upsert({"_id": emoji, "role": role.id, guild_id": ctx.guild.id})
+        await self.bot.reaction_roles.upsert({"_id": emoji, "role": role.id, "guild_id": ctx.guild.id})
 
         await self.rebuild_role_embed(ctx.guild.id)
         await ctx.send("That is added and good to go!")
