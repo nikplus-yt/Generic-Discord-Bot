@@ -36,7 +36,7 @@ class Reactions(commands.Cog, name="ReactionRoles"):
         channel = await self.bot.fetch_channel(channel_id)
         message = await channel.fetch_message(message_id)
 
-        embed = discord.Embed(title="Reaction Roles!", color=0x8000ff)
+        embed = discord.Embed(title="Ping Roles!", color=0x8000ff)
         await message.clear_reactions()
 
         desc = ""
@@ -44,7 +44,7 @@ class Reactions(commands.Cog, name="ReactionRoles"):
         reaction_roles = list(filter(lambda r: r['guild_id'] == guild_id, reaction_roles))
         for item in reaction_roles:
             role = guild.get_role(item["role"])
-            desc += f"{item['_id']}: {role.mention}\n"
+            desc += f"{item['_id']}: {role.mention} - {description}\n"
             await message.add_reaction(item["_id"])
 
         embed.description = desc
@@ -119,7 +119,7 @@ class Reactions(commands.Cog, name="ReactionRoles"):
     @commands.guild_only()
     # @commands.has_guild_permissions(manage_roles=True)
     @is_setup()
-    async def rr_add(self, ctx, emoji: typing.Union[discord.Emoji, str], *, role: discord.Role):
+    async def rr_add(self, ctx, emoji: typing.Union[discord.Emoji, str], role: discord.Role, *, description=None):
         """Add a new reaction role."""
         reacts = await self.get_current_reactions(ctx.guild.id)
         if len(reacts) >= 20:
