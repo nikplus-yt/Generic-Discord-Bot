@@ -9,7 +9,7 @@ class verify(commands.Cog):
         self.bot = bot
     @commands.command(pass_context=True)
     async def agree(self, ctx):
-        verify_role = get(ctx.guild.roles, name='Peasents')
+        verify_role = get(ctx.guild.roles, name='Peasants')
         if ctx.channel.id == verify_channel and ctx.author.roles != 853500656446341130:
             await ctx.author.add_roles(verify_role)
             embed = discord.Embed(title=f'Welcome {ctx.author}!', description=f'**<a:PenguinWalk:854189751556243496> Welcome to {ctx.guild.name}! <a:PenguinWalk:854189751556243496>**\n\n Welcome {ctx.author.mention}! Please make sure to read the <#853500885207482418> and get your roles here <#855632692166393868>!', color=embed_color)
