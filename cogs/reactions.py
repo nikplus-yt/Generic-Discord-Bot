@@ -36,7 +36,7 @@ class Reactions(commands.Cog, name="ReactionRoles"):
         channel = await self.bot.fetch_channel(channel_id)
         message = await channel.fetch_message(message_id)
 
-        embed = discord.Embed(title="Reaction Roles!")
+        embed = discord.Embed(title="Reaction Roles!", color=0x8000ff)
         await message.clear_reactions()
 
         desc = ""
