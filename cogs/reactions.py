@@ -44,7 +44,7 @@ class Reactions(commands.Cog, name="ReactionRoles"):
         reaction_roles = list(filter(lambda r: r['guild_id'] == guild_id, reaction_roles))
         for item in reaction_roles:
             role = guild.get_role(item["role"])
-            desc += f"{item['_id']}: {role.mention} - {description}\n"
+            desc += f"{item['_id']}: {role.mention} - {infomoration}\n"
             await message.add_reaction(item["_id"])
 
         embed.description = desc
@@ -119,7 +119,7 @@ class Reactions(commands.Cog, name="ReactionRoles"):
     @commands.guild_only()
     # @commands.has_guild_permissions(manage_roles=True)
     @is_setup()
-    async def rr_add(self, ctx, emoji: typing.Union[discord.Emoji, str], role: discord.Role, *, description=None):
+    async def rr_add(self, ctx, emoji: typing.Union[discord.Emoji, str], role: discord.Role, *, information=None):
         """Add a new reaction role."""
         reacts = await self.get_current_reactions(ctx.guild.id)
         if len(reacts) >= 20:
@@ -136,7 +136,7 @@ class Reactions(commands.Cog, name="ReactionRoles"):
                 return
 
         emoji = str(emoji)
-        await self.bot.reaction_roles.upsert({"_id": emoji, "role": role.id, "guild_id": ctx.guild.id})
+        await self.bot.reaction_roles.upsert({"_id": emoji, "role": role.id, "information": information, guild_id": ctx.guild.id})
 
         await self.rebuild_role_embed(ctx.guild.id)
         await ctx.send("That is added and good to go!")
