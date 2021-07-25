@@ -54,7 +54,7 @@ class Invites(commands.Cog):
         channel = discord.utils.get(member.guild.text_channels, name="welcome")
         embed = discord.Embed(
             title=f"<a:PenguinWalk:854189751556243496> Welcome {member.display_name} <a:PenguinWalk:854189751556243496>!",
-            description=f"Please read the <#853500885207482418> and get your roles here <#855632692166393868>\n\nInvited by: {inviter.mention}\nInvites: {data['count']}", color=0xc71c10,
+            description=f"Welcome {member.mention}! Please read the <#853500885207482418> and get your roles here <#855632692166393868>\n\nInvited by: {inviter.mention}\nInvites: {data['count']}", color=0xc71c10,
             timestamp=member.joined_at,
         )
         embed.set_thumbnail(url=member.avatar_url)
