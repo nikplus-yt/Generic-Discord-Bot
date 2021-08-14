@@ -169,9 +169,7 @@ class Moderation(commands.Cog):
         if isinstance(error, commands.BadArgument):
             await ctx.send(error)
         else:
-            error = getattr(error, 'original', error)
-            print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
-            traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
+            await ctx.send(error)
             
     @commands.command(
         name='unmute',
@@ -211,9 +209,7 @@ class Moderation(commands.Cog):
         if isinstance(error, commands.BadArgument):
             await ctx.send(error)
         else:
-            error = getattr(error, 'original', error)
-            print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
-            traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr
+            await ctx.send(error)
                                       
     @commands.command(
         name="kick",
@@ -253,9 +249,7 @@ class Moderation(commands.Cog):
         if isinstance(error, commands.BadArgument):
             await ctx.send(error)
         else:
-            error = getattr(error, 'original', error)
-            print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
-            traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr
+            await ctx.send(error)
                                       
     @commands.command(
         name="ban",
@@ -296,7 +290,7 @@ class Moderation(commands.Cog):
             embed = discord.Embed(title="**❌ Error**",description=f"You don't have correct permissions to run `ban`.", color=embed_color)
             await ctx.send(embed=embed)
         elif isinstance(error, commands.MissingRequiredArgument):
-            embed = discord.Embed(title='No user was banned',description=f'Incorrect command usuage.\n Correct usuage: `>ban @user [reason]`, example: `>ban {self.bot.user} testing`', color=embed_color)
+            embed = discord.Embed(title='No user was banned',description=f'Incorrect command usuage.\n Correct usuage: `.ban @user [reason]`, example: `.ban {self.bot.user} testing`', color=embed_color)
             await ctx.send(embed=embed)
 
     @commands.command(
@@ -323,9 +317,7 @@ class Moderation(commands.Cog):
         if isinstance(error, commands.BadArgument):
             await ctx.send(error)
         else:
-            error = getattr(error, 'original', error)
-            print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
-            traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr
+            await ctx.send(error)
     @commands.command(
         name="moderate",
         description="This moderates a user's nickname",
