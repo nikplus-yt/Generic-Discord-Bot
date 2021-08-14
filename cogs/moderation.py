@@ -165,7 +165,7 @@ class Moderation(commands.Cog):
     @mute.error
     async def mute_error(self, ctx, error):
         if isinstance(error, commands.CheckFailure):
-            pass
+            await ctx.send(error)
         if isinstance(error, commands.BadArgument):
             await ctx.send(error)
         else:
@@ -204,7 +204,17 @@ class Moderation(commands.Cog):
         embed.set_footer(text=f'Offender ID: {member.id} | Moderator ID: {ctx.author.id}')
         channel = self.bot.get_channel(mod_logs)
         await channel.send(embed=embed)
-
+    @unmute.error
+    async def unmute_error(self, ctx, error):
+        if isinstance(error, commands.CheckFailure):
+            await ctx.send(error)
+        if isinstance(error, commands.BadArgument):
+            await ctx.send(error)
+        else:
+            error = getattr(error, 'original', error)
+            print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+            traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr
+                                      
     @commands.command(
         name="kick",
         description="A command which kicks a given user",
@@ -236,7 +246,17 @@ class Moderation(commands.Cog):
                 await ctx.message.delete()
                 channel = self.bot.get_channel(mod_logs)
                 await channel.send(embed=embed)
-
+    @kick.error
+    async def kick_error(self, ctx, error):
+        if isinstance(error, commands.CheckFailure):
+            await ctx.send(error)
+        if isinstance(error, commands.BadArgument):
+            await ctx.send(error)
+        else:
+            error = getattr(error, 'original', error)
+            print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+            traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr
+                                      
     @commands.command(
         name="ban",
         description="A command which bans a given user",
@@ -279,7 +299,6 @@ class Moderation(commands.Cog):
             embed = discord.Embed(title='No user was banned',description=f'Incorrect command usuage.\n Correct usuage: `>ban @user [reason]`, example: `>ban {self.bot.user} testing`', color=embed_color)
             await ctx.send(embed=embed)
 
-
     @commands.command(
         name="unban",
         description="A command which unbans a given user",
@@ -297,6 +316,16 @@ class Moderation(commands.Cog):
         await ctx.message.delete()
         channel = self.bot.get_channel(mod_logs)
         await channel.send(embed=embed)
+    @unban.error
+    async def unban_error(self, ctx, error):
+        if isinstance(error, commands.CheckFailure):
+            await ctx.send(error)
+        if isinstance(error, commands.BadArgument):
+            await ctx.send(error)
+        else:
+            error = getattr(error, 'original', error)
+            print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+            traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr
     @commands.command(
         name="moderate",
         description="This moderates a user's nickname",
