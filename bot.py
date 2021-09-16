@@ -3,6 +3,7 @@ import contextlib
 import io
 import os
 import logging
+import discord_components import *
 
 # Third party libraries
 import textwrap
@@ -108,6 +109,7 @@ async def on_ready():
     print(bot.muted_users)
 
     print("Initialized Database\n-----")
+    DiscordComponents(client)
 
 
 @bot.event
