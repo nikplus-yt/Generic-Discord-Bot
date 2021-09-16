@@ -40,8 +40,8 @@ class Menus(commands.Cog):
 
                 label = event.component[0].label
 
-                    if label == "Dead Chat Ping":
-                        await event.respond(
+                if label == "Dead Chat Ping":
+                    await event.respond(
                             type=InteractionType.ChannelMessageWithSource,
                             ephemeral=True, # we dont want to spam someone
                             embed=e1
