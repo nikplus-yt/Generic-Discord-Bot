@@ -30,9 +30,9 @@ class Menus(commands.Cog):
                                     ),
                                 ])]
                                 ) 
-        e1 = Embed(title="Role Given!", description="You were given the <@&854187482806616064> role")
-        e2 = Embed(title="Role Given!", description="You were given the <@&854187970386853889> role")
-        e3 = Embed(title="Role Given", description="You were given the <@&854186313829580832> role")
+        e1 = discord.Embed(title="Role Given!", description="You were given the <@&854187482806616064> role")
+        e2 = discord.Embed(title="Role Given!", description="You were given the <@&854187970386853889> role")
+        e3 = discord.Embed(title="Role Given", description="You were given the <@&854186313829580832> role")
 
         while True:
             try: # try except is not required but i would recommend using it
