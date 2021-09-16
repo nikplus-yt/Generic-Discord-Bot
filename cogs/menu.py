@@ -1,7 +1,7 @@
 import discord
 import DiscordUtils
 from discord.ext import commands
-import discord_components import *
+from discord_components import *
 
 class Menus(commands.Cog):
     def __init__(self, bot):
