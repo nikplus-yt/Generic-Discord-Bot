@@ -133,7 +133,7 @@ class Channels(commands.Cog):
                 ctx.guild.default_role: discord.PermissionOverwrite(send_messages=False)
             }
             await channel.edit(overwrites=overwrites)
-            embed=discord.Embed(title="I locked {channel.name}!", description=f'I have put {channel.name} on lockdown.', color=0x0ce846
+            embed=discord.Embed(title=F"I locked {channel.name}!", description=f'I have put {channel.name} on lockdown.', color=0x0ce846)
             await ctx.send(embed=embed)
         elif (
             channel.overwrites[ctx.guild.default_role].send_messages == True
@@ -142,13 +142,13 @@ class Channels(commands.Cog):
             overwrites = channel.overwrites[ctx.guild.default_role]
             overwrites.send_messages = False
             await channel.set_permissions(ctx.guild.default_role, overwrite=overwrites)
-            embed=Discord(title="I locked {channel.name}!", description=f'I have put {channel.name} on lockdown.', color=0x0ce846
+            embed=discord.Embed(title=f"I locked {channel.name}!", description=f'I have put {channel.name} on lockdown.', color=0x0ce846)
             await ctx.send(embed=embed)
         else:
             overwrites = channel.overwrites[ctx.guild.default_role]
             overwrites.send_messages = True
             await channel.set_permissions(ctx.guild.default_role, overwrite=overwrites)
-            embed=Discord(title="I unlocked {channel.name}!", description=f'I have removed {channel.name} from lockdown.', color=0x0ce846
+            embed=discord.Embed(title=f"I unlocked {channel.name}!", description=f'I have removed {channel.name} from lockdown.', color=0x0ce846)
             await ctx.send(embed=embed)
 
 
