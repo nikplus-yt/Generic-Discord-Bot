@@ -11,7 +11,7 @@ class Menus(commands.Cog):
 
     @commands.command()
     async def menu1(self, ctx):
-        await ctx.send("Just select the roles you're interested in below.", components = [Select(placeholder="Make a selection"), options=[SelectOption(label="Dead Chat Ping", value='A')SelectOption(label="test", value='B')]])
+        await ctx.send("Just select the roles you're interested in below.", components = [Select(placeholder="Make a selection"), options=[SelectOption(label="Dead Chat Ping", value='A'), SelectOption(label="test", value='B')]])
         interaction = await self.bot.wait_for("select_option", check = lambda i: i.component[0].value == "A")
         await interaction.respond(content = f"You have selected `{interaction.component[0].label}`")
 
