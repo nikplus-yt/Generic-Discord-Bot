@@ -3,7 +3,7 @@ import contextlib
 import io
 import os
 import logging
-import discord_components import *
+from discord_components import *
 
 # Third party libraries
 import textwrap
