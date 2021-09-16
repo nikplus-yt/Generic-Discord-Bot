@@ -9,7 +9,7 @@ class Menus(commands.Cog):
 
     @commands.command(name='select-test')
     async def menu1(self, ctx):
-        await ctx.send("Just select the roles you're interested in below."c
+        await ctx.send("Just select the roles you're interested in below.",
                        components= 
                        [Select(placeholder="Make a selection",
                                 options=[
