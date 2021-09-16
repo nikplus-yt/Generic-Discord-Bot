@@ -16,17 +16,17 @@ class Menus(commands.Cog):
                                     SelectOption(
                                         label="Dead Chat Ping",
                                         value="option1",
-                                        emoji="�☠" # you can use discord.Parti ... emoji to use a custom one (i dont know what its called)
+                                        emoji="☠" # you can use discord.Parti ... emoji to use a custom one (i dont know what its called)
                                     ),
                                     SelectOption(
                                         label="Giveaway Ping",
                                         value="option2",
-                                        emoji="�🎁" # you can use discord.Parti ... emoji to use a custom one (i dont know what its called)
+                                        emoji="🎁" # you can use discord.Parti ... emoji to use a custom one (i dont know what its called)
                                     ),
                                     SelectOption(
                                         label="Event Ping",
                                         value="option3",
-                                        emoji="�📅" # you can use discord.Parti ... emoji to use a custom one (i dont know what its called)
+                                        emoji="📅" # you can use discord.Parti ... emoji to use a custom one (i dont know what its called)
                                     ),
                                 ])]
                                 ) 
