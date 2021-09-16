@@ -109,7 +109,7 @@ async def on_ready():
     print(bot.muted_users)
 
     print("Initialized Database\n-----")
-    DiscordComponents(client)
+    DiscordComponents(bot)
 
 
 @bot.event
