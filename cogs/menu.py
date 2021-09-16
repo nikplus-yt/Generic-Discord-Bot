@@ -46,13 +46,13 @@ class Menus(commands.Cog):
                             ephemeral=True, # we dont want to spam someone
                             embed=e1
                         )
-                    elif label == "Giveaway Ping":
+                elif label == "Giveaway Ping":
                         await event.respond(
                             type=InteractionType.ChannelMessageWithSource,
                             ephemeral=True, # we dont want to spam someone
                             embed=e2
                         )
-                    elif label == "Event Ping":
+                elif label == "Event Ping":
                         await event.respond(
                             type=InteractionType.ChannelMessageWithSource,
                             ephemeral=False, # we dont want to spam
