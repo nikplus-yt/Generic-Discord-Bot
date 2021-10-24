@@ -3,7 +3,7 @@ from discord.ext import commands
 import asyncio
 from utils.util import Pag
 from cogs.moderation import staff_list
-mod_logs = 854077705879552070
+mod_logs = 865809356032573450
 embed_red=discord.Colour.red()
 
 class Warns(commands.Cog):
