@@ -13,8 +13,8 @@ time_regex = re.compile("(?:(\d{1,5})(h|s|m|d))+?")
 time_dict = {"h": 3600, "s": 1, "m": 60, "d": 86400}
 
 staff_list = [633025959221788676, 853437257800089610]
-mod_logs = 854077705879552070
-bot_logs = 854077718122463243
+mod_logs = 865809356032573450
+bot_logs = 865809356032573450
 class TimeConverter(commands.Converter):
     async def convert(self, ctx, argument):
         args = argument.lower()
